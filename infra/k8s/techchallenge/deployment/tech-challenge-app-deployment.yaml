@@ -74,4 +74,4 @@ spec:
             - name: EXTERNAL_API_GET_PAYMENT
               value: "/v1/payments/"
             - name: EXTERNAL_API_NOTIFICATION_URL
-              value: "https://webhook.site/dac3f51a-a6b8-491c-adab-940ebd49d661"
+              value: "https://soat-app.free.beeceptor.com"
