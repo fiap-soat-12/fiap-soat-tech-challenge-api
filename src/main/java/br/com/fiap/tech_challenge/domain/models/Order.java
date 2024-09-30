@@ -106,4 +106,12 @@ public class Order {
 		this.status = status;
 	}
 
+	public void setStatusReady(){
+		this.status = OrderStatusEnum.READY;
+	}
+
+	public void setStatusFinished(){
+		this.status = OrderStatusEnum.FINISHED;
+	}
+
 }

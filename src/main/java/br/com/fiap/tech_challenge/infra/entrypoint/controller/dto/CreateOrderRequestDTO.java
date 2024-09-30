@@ -10,12 +10,12 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 public record CreateOrderRequestDTO(
-		@Schema(example = "ab69e046-fb5a-4a79-98d6-363efdf20e11") @NullOrValidUUID String customerId,
+		@Schema(example = "cd5b8e43-5d8f-4e92-9f7d-6b9d7e4f7e9c") @NullOrValidUUID String customerId,
 		@NotEmpty @Valid List<OrderProducts> products) {
 
 	public record OrderProducts(
 
-			@Schema(example = "ab69e046-fb5a-4a79-98d6-363efdf20e11") @ValidUUID @NotNull String id,
+			@Schema(example = "7091cbdc-2d24-4faf-aadd-995a7bcc6b5b") @ValidUUID @NotNull String id,
 			@Schema(example = "Without Onions please") String observation) {
 
 	}
