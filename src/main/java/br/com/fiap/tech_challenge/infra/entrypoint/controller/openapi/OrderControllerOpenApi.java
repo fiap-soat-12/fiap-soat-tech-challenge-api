@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.UUID;
 
@@ -44,5 +45,13 @@ public interface OrderControllerOpenApi {
 	@ApiResponse(responseCode = "500", description = "Internal Server Error Response",
 			content = @Content(mediaType = "application/json", schema = @Schema(ref = "ProblemDto")))
 	ResponseEntity<Boolean> isOrderPaid(UUID id);
+
+	@Operation(summary = "Evolve Status of Orders")
+	@ApiResponse(responseCode = "204", description = "OK Response")
+	@ApiResponse(responseCode = "404", description = "Not Found Response",
+			content = @Content(mediaType = "application/json", schema = @Schema(ref = "ProblemDto")))
+	@ApiResponse(responseCode = "500", description = "Internal Server Error Response",
+			content = @Content(mediaType = "application/json", schema = @Schema(ref = "ProblemDto")))
+	ResponseEntity<?> evolveStatus(@PathVariable("id") final UUID id);
 
 }
