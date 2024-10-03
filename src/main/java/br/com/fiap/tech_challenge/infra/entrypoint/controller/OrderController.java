@@ -31,12 +31,12 @@ public class OrderController implements OrderControllerOpenApi {
 	private final OrderMapper mapper;
 
 	public OrderController(CreateOrderUseCase createOrderUseCase, FindWorkItemsUseCase findWorkItemsUseCase,
-                           IsPaidUseCase isOrderPaid, EvolveOrderUseCase evolveOrderUseCase, OrderMapper mapper) {
+			IsPaidUseCase isOrderPaid, EvolveOrderUseCase evolveOrderUseCase, OrderMapper mapper) {
 		this.createOrderUseCase = createOrderUseCase;
 		this.findWorkItemsUseCase = findWorkItemsUseCase;
 		this.isPaidUseCase = isOrderPaid;
-        this.evolveOrderUseCase = evolveOrderUseCase;
-        this.mapper = mapper;
+		this.evolveOrderUseCase = evolveOrderUseCase;
+		this.mapper = mapper;
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class OrderController implements OrderControllerOpenApi {
 
 	@Override
 	@PatchMapping("/{id}")
-	public ResponseEntity<?> evolveStatus(@PathVariable("id") final UUID id){
+	public ResponseEntity<?> evolveStatus(@PathVariable("id") final UUID id) {
 		evolveOrderUseCase.evolveOrder(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}

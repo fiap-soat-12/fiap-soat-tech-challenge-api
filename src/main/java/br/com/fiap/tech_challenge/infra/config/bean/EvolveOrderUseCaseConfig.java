@@ -12,10 +12,10 @@ import java.util.List;
 @Configuration
 public class EvolveOrderUseCaseConfig {
 
-    @Bean
-    public EvolveOrderUseCaseImpl evolveOrderUseCase(OrderPersistence orderPersistence,
-                                                     EvolveToFinished evolveToFinished,
-                                                     EvolveToReady evolveToReady){
-        return new EvolveOrderUseCaseImpl(orderPersistence, List.of(evolveToFinished, evolveToReady));
-    }
+	@Bean
+	public EvolveOrderUseCaseImpl evolveOrderUseCase(OrderPersistence orderPersistence,
+			EvolveToFinished evolveToFinished, EvolveToReady evolveToReady) {
+		return new EvolveOrderUseCaseImpl(orderPersistence, List.of(evolveToFinished, evolveToReady));
+	}
+
 }

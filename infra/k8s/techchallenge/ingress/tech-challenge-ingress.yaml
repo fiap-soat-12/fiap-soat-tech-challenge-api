@@ -10,8 +10,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: fiap-techchallenge.local
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix

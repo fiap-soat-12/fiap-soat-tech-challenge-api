@@ -18,6 +18,7 @@ spec:
       containers:
         - name: tech-challenge-app
           image: willosouza/fiap-soat-tech-challenge:v2.0.0
+          imagePullPolicy: Always
           ports:
             - containerPort: 8357
           readinessProbe:
@@ -73,5 +74,3 @@ spec:
               value: "/instore/orders/qr/seller/collectors/1986357239/pos/FIAPSOAT12C/qrs"
             - name: EXTERNAL_API_GET_PAYMENT
               value: "/v1/payments/"
-            - name: EXTERNAL_API_NOTIFICATION_URL
-              value: "https://soat-app.free.beeceptor.com"

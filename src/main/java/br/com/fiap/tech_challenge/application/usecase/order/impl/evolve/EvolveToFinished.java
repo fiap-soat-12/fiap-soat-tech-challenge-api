@@ -5,10 +5,11 @@ import br.com.fiap.tech_challenge.domain.models.enums.OrderStatusEnum;
 
 public class EvolveToFinished implements EvolveRules {
 
-    @Override
-    public void evolveTo(Order order) {
-        if(OrderStatusEnum.READY.equals(order.getStatus())) {
-            order.setStatusFinished();
-        }
-    }
+	@Override
+	public void evolveTo(Order order) {
+		if (OrderStatusEnum.READY.equals(order.getStatus())) {
+			order.setStatusFinished();
+		}
+	}
+
 }

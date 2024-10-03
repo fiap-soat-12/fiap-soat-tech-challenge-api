@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class EvolveToFinishedConfig {
 
-    @Bean
-    public EvolveToFinished evolveToFinished(){
-        return new EvolveToFinished();
-    }
+	@Bean
+	public EvolveToFinished evolveToFinished() {
+		return new EvolveToFinished();
+	}
 
 }
