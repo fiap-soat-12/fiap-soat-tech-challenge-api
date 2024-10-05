@@ -4,16 +4,6 @@ service:
   type: NodePort
   nodePort: 30002
 
-persistence:
-  enabled: true
-  size: 10Gi
-
-sidecar:
-  dashboards:
-    enabled: true
-    label: grafana_dashboard
-    folder: "/var/lib/grafana/dashboards"
-
 dashboardProviders:
   dashboardproviders.yaml:
     apiVersion: 1
@@ -26,6 +16,18 @@ dashboardProviders:
         editable: true
         options:
           path: /var/lib/grafana/dashboards
+
+dashboardsConfigMaps:
+  default: grafana-dashboards
+
+extraVolumeMounts:
+  - name: grafana-dashboards
+    mountPath: /var/lib/grafana/dashboards
+
+extraVolumes:
+  - name: grafana-dashboards
+    configMap:
+      name: grafana-dashboards
 
 datasources:
   datasources.yaml:
