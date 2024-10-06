@@ -15,5 +15,5 @@ data "aws_subnet" "selected_subnets" {
 }
 
 data "aws_iam_role" "lab_role" {
-  name = "an_example_role_name"
+  name = "LabRole"
 }

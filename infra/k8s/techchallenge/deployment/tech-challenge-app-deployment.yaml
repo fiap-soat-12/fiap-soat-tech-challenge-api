@@ -47,7 +47,7 @@ spec:
               memory: "1Gi"
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: k8s
+              value: default
             - name: SPRING_DATASOURCE_URL
               valueFrom:
                 secretKeyRef:
