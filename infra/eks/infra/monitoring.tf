@@ -42,3 +42,11 @@ resource "helm_release" "grafana" {
     helm_release.metrics_server
   ]
 }
+
+resource "kubernetes_manifest" "monitoring_ingress" {
+  manifest = yamldecode(file("${path.module}/../../k8s/monitoring/grafana/grafana-ingress.yaml"))
+
+  depends_on = [
+    helm_release.grafana
+  ]
+}

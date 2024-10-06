@@ -51,15 +51,7 @@ resource "kubernetes_manifest" "techchallenge_statefulset" {
 
 resource "kubernetes_manifest" "techchallenge_deployments" {
   for_each = fileset("${path.module}/../../k8s/techchallenge/deployment", "*.yaml")
-  # manifest = yamldecode(file("${path.module}/../../k8s/techchallenge/deployment/${each.value}"))
-
-  manifest = yamldecode(templatefile("${path.module}/../../k8s/techchallenge/deployment/${each.value}", {
-    springdoc_api-docs_server_url   = "LoadBalancer"
-  }))
-
-  field_manager {
-    force_conflicts = true
-  }
+  manifest = yamldecode(file("${path.module}/../../k8s/techchallenge/deployment/${each.value}"))
 
   depends_on = [
     kubernetes_manifest.techchallenge_namespaces,

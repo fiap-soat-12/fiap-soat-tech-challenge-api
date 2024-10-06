@@ -1,9 +1,5 @@
 adminPassword: "techchallenge"
 
-service:
-  type: NodePort
-  nodePort: 30002
-
 dashboardProviders:
   dashboardproviders.yaml:
     apiVersion: 1
@@ -42,3 +38,6 @@ datasources:
 grafana.ini:
   "dashboards":
     min_refresh_interval: "1s"
+  server:
+    root_url: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
+    serve_from_sub_path: true

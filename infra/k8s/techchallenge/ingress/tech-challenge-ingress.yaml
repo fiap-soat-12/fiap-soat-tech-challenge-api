@@ -4,7 +4,6 @@ metadata:
   name: tech-challenge-ingress
   namespace: techchallenge
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/x-forwarded-port: "true"
     nginx.ingress.kubernetes.io/x-forwarded-host: "true"
 spec:
@@ -12,7 +11,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /api
         pathType: Prefix
         backend:
           service:
