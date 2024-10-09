@@ -1,6 +1,6 @@
 controller:
   service:
-    type: NodePort
+    type: LoadBalancer
     nodePorts:
       http: 30080
       https: 30443
@@ -10,7 +10,7 @@ controller:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "10254"
-      labels: 
+      labels:
         app: ingress-nginx
       type: ClusterIP
       port: 10254

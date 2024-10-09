@@ -20,12 +20,12 @@ import java.util.Map;
 @Configuration
 public class SpringDocConfigurations {
 
-	@Value("${springdoc.api-docs.server.url}")
+	@Value("${springdoc.api-docs.server.url:}")
 	private String apiDocsUrl;
 
 	@Bean
 	public OpenAPI customOpenAPI() {
-		return new OpenAPI().info(new Info().title("Tech Challenge FIAP API").version("v1").description("""
+		OpenAPI openAPI = new OpenAPI().info(new Info().title("Tech Challenge FIAP API").version("v1").description("""
 				API Rest for Tech Challenge of Master's Degree in Software Architecture \n
 				Developed by:\n
 				 - Alexandre Miranda - RM357321\n
@@ -34,8 +34,13 @@ public class SpringDocConfigurations {
 				 - Rodrigo Sartori - RM358002\n
 				 - Wilton Souza - RM357991\n
 				""").contact(new Contact().name("SOAT 8 Group").email("soat-group@gmail.com")))
-			.addServersItem(new Server().url(apiDocsUrl))
 			.components(new Components().schemas(this.generateSchemas()));
+
+		if (apiDocsUrl != null && !apiDocsUrl.isEmpty()) {
+			openAPI.addServersItem(new Server().url(apiDocsUrl));
+		}
+
+		return openAPI;
 	}
 
 	@SuppressWarnings("rawtypes")

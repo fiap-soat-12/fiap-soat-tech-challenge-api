@@ -10,14 +10,12 @@ import br.com.fiap.tech_challenge.infra.gateway.client.cotroller.response.MpPaym
 import br.com.fiap.tech_challenge.infra.gateway.client.cotroller.PaymentClientController;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.stream.Collectors;
 
 @Component
 public class PaymentClientImpl implements PaymentClient {
-
-	@Value("${external.api.notification.url}")
-	private String NOTIFICATION_URL;
 
 	private final PaymentClientController paymentClientController;
 
@@ -27,13 +25,15 @@ public class PaymentClientImpl implements PaymentClient {
 
 	@Override
 	public String generateQrCode(PaymentDTO dto) {
+		var notificationUrl = getHostInfo() + "/v1/webhook-payment";
+
 		var request = new MpPaymentQRRequest(dto.getDescription(), dto.getExpirationDate(), dto.getExternalReference(),
 				dto.getItems()
 					.stream()
 					.map(item -> new MpPaymentItemQRRequest(item.getCategory(), item.getTitle(), item.getDescription(),
 							item.getUnitPrice(), item.getQuantity(), item.getUnitMeasure(), item.getTotalAmount()))
 					.collect(Collectors.toList()),
-				dto.getTitle(), dto.getTotalAmount(), NOTIFICATION_URL);
+				dto.getTitle(), dto.getTotalAmount(), notificationUrl);
 
 		MpPaymentQRResponse response = paymentClientController.createQr(request);
 
@@ -47,6 +47,10 @@ public class PaymentClientImpl implements PaymentClient {
 		MpPaymentGetResponse response = paymentClientController.getPayment(dataId);
 
 		return new PaymentStatusDTO(response.getExternalReference(), response.getId(), response.getStatus());
+	}
+
+	private String getHostInfo() {
+		return ServletUriComponentsBuilder.fromCurrentContextPath().toUriString();
 	}
 
 }

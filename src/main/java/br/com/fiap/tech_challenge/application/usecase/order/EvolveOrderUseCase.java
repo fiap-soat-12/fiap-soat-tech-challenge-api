@@ -4,5 +4,6 @@ import java.util.UUID;
 
 public interface EvolveOrderUseCase {
 
-    void evolveOrder(UUID id);
+	void evolveOrder(UUID id);
+
 }

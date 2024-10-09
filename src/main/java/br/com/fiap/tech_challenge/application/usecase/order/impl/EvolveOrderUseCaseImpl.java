@@ -9,20 +9,22 @@ import java.util.UUID;
 
 public class EvolveOrderUseCaseImpl implements EvolveOrderUseCase {
 
-    private final OrderPersistence persistence;
-    private final List<EvolveRules> evolveRules;
+	private final OrderPersistence persistence;
 
-    public EvolveOrderUseCaseImpl(OrderPersistence persistence, List<EvolveRules> evolveRules) {
-        this.persistence = persistence;
-        this.evolveRules = evolveRules;
-    }
+	private final List<EvolveRules> evolveRules;
 
-    @Override
-    public void evolveOrder(UUID id) {
-        var order = persistence.findById(id).orElseThrow();
+	public EvolveOrderUseCaseImpl(OrderPersistence persistence, List<EvolveRules> evolveRules) {
+		this.persistence = persistence;
+		this.evolveRules = evolveRules;
+	}
 
-        evolveRules.forEach(rule -> rule.evolveTo(order));
+	@Override
+	public void evolveOrder(UUID id) {
+		var order = persistence.findById(id).orElseThrow();
 
-        persistence.update(order);
-    }
+		evolveRules.forEach(rule -> rule.evolveTo(order));
+
+		persistence.update(order);
+	}
+
 }

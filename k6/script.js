@@ -19,6 +19,6 @@ export const options = {
 };
 
   export default function() {
-    http.get('http://fiap-techchallenge.local:30080/api/v1/products?category=MAIN_COURSE&page=0&size=10');
+    http.get('http://a8e0d0f878a604c1791119251f84c344-1622608272.us-east-1.elb.amazonaws.com/api/v1/products?category=MAIN_COURSE&page=0&size=10');
     sleep(1);
   }

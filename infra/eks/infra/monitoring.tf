@@ -1,5 +1,5 @@
 resource "kubernetes_manifest" "monitoring_namespaces" {
-  manifest = yamldecode(file("${path.module}/../k8s/monitoring/namespace.yaml"))
+  manifest = yamldecode(file("${path.module}/../../k8s/monitoring/namespace.yaml"))
 }
 
 resource "helm_release" "kube-prometheus-stack" {
@@ -8,7 +8,7 @@ resource "helm_release" "kube-prometheus-stack" {
   chart      = "kube-prometheus-stack"
   repository = "https://prometheus-community.github.io/helm-charts"
   version    = "51.2.0"
-  values     = [file("${path.module}/../k8s/monitoring/kube-prometheus-stack/values.yaml")]
+  values     = [file("${path.module}/../../k8s/monitoring/kube-prometheus-stack/values.yaml")]
 
   timeout = 600
 
@@ -19,7 +19,7 @@ resource "helm_release" "kube-prometheus-stack" {
 }
 
 resource "kubernetes_manifest" "grafana_configmaps" {
-  manifest = yamldecode(file("${path.module}/../k8s/monitoring/grafana/configmap.yaml"))
+  manifest = yamldecode(file("${path.module}/../../k8s/monitoring/grafana/configmap.yaml"))
 
   depends_on = [
     kubernetes_manifest.monitoring_namespaces
@@ -32,7 +32,7 @@ resource "helm_release" "grafana" {
   chart      = "grafana"
   repository = "https://grafana.github.io/helm-charts"
   version    = "8.5.1"
-  values     = [file("${path.module}/../k8s/monitoring/grafana/values.yaml")]
+  values     = [file("${path.module}/../../k8s/monitoring/grafana/values.yaml")]
 
   timeout = 600
 
@@ -44,10 +44,9 @@ resource "helm_release" "grafana" {
 }
 
 resource "kubernetes_manifest" "monitoring_ingress" {
-  manifest = yamldecode(file("${path.module}/../k8s/monitoring/grafana/grafana-ingress.yaml"))
+  manifest = yamldecode(file("${path.module}/../../k8s/monitoring/grafana/grafana-ingress.yaml"))
 
   depends_on = [
     helm_release.grafana
   ]
 }
-
