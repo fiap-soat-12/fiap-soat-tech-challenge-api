@@ -2,10 +2,10 @@
 
 # Pós Tech FIAP - Tech Challenge - Grupo 12
 
-![GitHub Release Date](https://img.shields.io/badge/Release%20Date-Agosto%202024-yellowgreen)
+![GitHub Release Date](https://img.shields.io/badge/Release%20Date-Outubro%202024-yellowgreen)
 ![](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellowgreen)
 <br>
-![](https://img.shields.io/badge/Version-%20v1.0.0-brightgreen)
+![](https://img.shields.io/badge/Version-%20v2.0.0-brightgreen)
 </div>
 
 ### 👨‍💼👩‍💼‍ Autores
@@ -30,15 +30,23 @@ pedidos, gerenciamento de pagamentos e envio dos pedidos para a cozinha após a 
 
 ## 🛠 Tecnologias Utilizadas
 ![Java](https://img.shields.io/badge/java_21-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)
+![Maven](https://img.shields.io/badge/Apache%20Maven-C71A36.svg?style=for-the-badge&logo=Apache-Maven&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring_3-%236DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white)
-![Postgres](https://img.shields.io/badge/postgresql-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![Postgres](https://img.shields.io/badge/PostgreSQL-4169E1.svg?style=for-the-badge&logo=PostgreSQL&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white)
+![AWS](https://img.shields.io/badge/Amazon%20EKS-FF9900.svg?style=for-the-badge&logo=Amazon-EKS&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
+![Helm](https://img.shields.io/badge/Helm-0F1689.svg?style=for-the-badge&logo=Helm&logoColor=white)
+![Prometheus](https://img.shields.io/badge/Prometheus-E6522C.svg?style=for-the-badge&logo=Prometheus&logoColor=white)
+![Grafana](https://img.shields.io/badge/Grafana-F46800.svg?style=for-the-badge&logo=Grafana&logoColor=white)
+![K6](https://img.shields.io/badge/k6-7D64FF.svg?style=for-the-badge&logo=k6&logoColor=white)
+![Mercado Pago](https://img.shields.io/badge/Mercado%20Pago-00B1EA.svg?style=for-the-badge&logo=Mercado-Pago&logoColor=white)
 
 ## 💫 Arquitetura
 
-O projeto segue a Arquitetura Hexagonal (Ports and Adapters), permitindo maior flexibilidade e facilidade de manutenção.
+O projeto segue a Clean Architecture, permitindo maior flexibilidade e facilidade de manutenção.
 
 ## ⚙️ Configuração
 
@@ -50,10 +58,9 @@ O projeto segue a Arquitetura Hexagonal (Ports and Adapters), permitindo maior f
 - **[Maven 3.6.3+](https://maven.apache.org/)**: Site oficial do Maven.
 - **[Docker](https://www.docker.com/)**: Site oficial do Docker.
 - **[Docker Compose](https://docs.docker.com/compose/)**: Documentação oficial do Docker Compose.
-
-#### Execução Local
-
-- Docker Compose
+- **[Kubernetes](https://kubernetes.io/pt-br/docs/home/)**: Documentação oficial do Kubernetes.
+- **[Terraform](https://www.terraform.io/)**: Site oficial do Terraform.
+- **[Mercado Pago](https://www.mercadopago.com.br/developers/pt/docs/qr-code/integration-configuration/qr-dynamic/integration)**: Documentação oficial do Mercado Pago.
 
 ### 🐳 Imagem Docker
 
@@ -63,8 +70,9 @@ link: https://hub.docker.com/r/willosouza/fiap-soat-tech-challenge
 
 ### 🚀 Execução
 
-#### Subindo a aplicação via docker compose
-
+<details style="cursor: pointer;">
+ <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Subindo aplicação via Docker Compose</summary>
+<br>
 Este projeto conta com um arquivo `docker-compose.yml` que pode ser utilizado para subir o container da aplicação e suas
 respectivas dependências (banco de dados).
 
@@ -116,24 +124,74 @@ Obs: Caso queira subir os containers no modo `detached`(Sem travar o terminal em
 rodar o seguinte comando: `docker compose up -d`
 
 ![Docker compose detached mode](./assets/compose_detached_mode.png)
+</details>
 
-### 🛒 Fake Checkout
+<details>
+ <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Subindo aplicação em Cluster Kubernetes local (Ex: Docker Desktop ou Minikube)</summary>
+ <br>
+  
+  1. Certificar que o Cluster local esteja executando;
+  2. Certificar que o Terraform esteja instalado;
+  3. Entrar na pasta `infra/terraform`;
+  4. Inicializar o Terraform no projeto `terraform init`;
+  5. Verificar que o script do Terraform é valido rodando o comando `terraform validate`;
+  6. Executar o comando `terraform plan` para executar o planejamento da execução/implementação;
+  7. Executar o comando `terraform apply` para criar a infra dentro do cluster;
 
-Nessa fase do pejeto, disponibilizamos um recurso para realizar o pagamento de um pedido de forma manual.
-Após gerar um pedido, é possível chamar o endpoint PUT `/v1/fake-checkout`, informando no body o id do pedido gerado.
-Ao realizar a chamada, se o pedido estiver no status inicial (`RECEIVED`), ele será atualizado para
-o status `PREPARING`, com a informação de que foi pago. Caso o pedido não esteja no status inicial,
-uma mensagem de erro será retornada informando que o pedido precisa estar no status `RECEIVED` para ser
-atualizado.
+  Para acessar a aplicação, será necessário acessar a rota através do IP Público do service do ingress. Esse passo é muda de acordo com o Cluster local que você estiver utilizando:
+  Caso esteja utilizando Docker Desktop:
+  1. Executar o comando `kubectl get svc -n nginx -ingress`;
+  2. Verificar //todo;
+
+  Caso esteja utilizando MiniKube:
+  1. Executar o comando `minikube tunnel`;
+  2. Executar o comando `kubectl get svc -n nginx -ingress`;
+  3. Verificar o IP Externo do service e acessar a aplicação utilizando o mesmo;
+
+</details>
+
+<details>
+  <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Subindo aplicação em Cluster EKS</summary>
+  <br>
+  
+  1. Certificar que o Terraform esteja instalado;
+  2. Certificar que o `aws cli` está instalado e configurado com as credenciais da sua conta AWS;
+  3. Acessar a pasta `infra/eks/cluster` que contém os arquivos que irão criar um Cluster EKS e Work Nodes na AWS;
+  4. Inicializar o Terraform no projeto `terraform init`;
+  5. Verificar que o script do Terraform é valido rodando o comando `terraform validate`;
+  6. Executar o comando `terraform plan` para executar o planejamento da execução/implementação;
+  7. Executar o comando `terraform apply` para criar a infra dentro do cluster;
+  8. Após a execução do Terraform finalizar, verificar se o cluster e os nodes foram inicializados na AWS;
+  9. Acessar a pasta `infra/eks/infra` que contém os arquivos que irão criar os Pods da aplicação e do Banco de Dados, os services e os recursos relacionados à monitoração na AWS;
+  10. Inicializar o Terraform no projeto `terraform init`;
+  11. Verificar que o script do Terraform é valido rodando o comando `terraform validate`;
+  12. Executar o comando `terraform plan` para executar o planejamento da execução/implementação;
+  13. Executar o comando `terraform apply` para criar a infra dentro do cluster;
+
+  Para acessar a aplicação, basta acessar o serviço Load Balancer na AWS, copiar o DNS do load balancer que foi criado e acessar as rotas da aplicação utilizando o DNS gerado.
+</details>
+
+### 🛒 Integração Checkout (Mercado Pago)
+
+Nessa fase do projeto, integramos o Checkout com a API do Mercado Pago possibilitando o pagamento com o QR Code dinâmico.
+
+Para que possa seja criado o QR Code, deverá ser criado um pedido (POST) `v1/orders`. //todo
 
 ### 📄 Documentação da API
 
 Link para acessar ao swagger após subir a aplicação:
 
 ```bash
+# Ambiente Local
 http://localhost:8357/api/swagger-ui/index.html
+
+# Ambiente EKS
+rota-do-load-balancer/api/swagger-ui/index.html
 ```
 
+### Adicionar Desenhos
+
+### Adicionar Diagramas
 
 ### 🎲 Seeds
 
