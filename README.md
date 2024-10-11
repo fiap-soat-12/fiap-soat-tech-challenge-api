@@ -161,7 +161,7 @@ rodar o seguinte comando: `docker compose up -d`
   ![open-api-docker-desktop-localhost](./assets/open-api-docker-desktop-localhost.png)
 
   Caso esteja utilizando MiniKube:
-  1. Executar o comando `minikube tunnel`;
+  1. Executar o comando `minikube tunnel`;<br>
   ![minikube-tunnel](./assets/minikube-tunnel.png)
 
   2. Executar o comando `kubectl get svc -n ingress-nginx`;
