@@ -30,6 +30,8 @@ pedidos, gerenciamento de pagamentos e envio dos pedidos para a cozinha após a 
 
 ## 🛠 Tecnologias Utilizadas
 
+<div align="center">
+
 ![Java](https://img.shields.io/badge/java_21-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring_3-%236DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white)
 ![Maven](https://img.shields.io/badge/Apache%20Maven-C71A36.svg?style=for-the-badge&logo=Apache-Maven&logoColor=white)
@@ -46,6 +48,8 @@ pedidos, gerenciamento de pagamentos e envio dos pedidos para a cozinha após a 
 ![Grafana](https://img.shields.io/badge/Grafana-F46800.svg?style=for-the-badge&logo=Grafana&logoColor=white)
 ![K6](https://img.shields.io/badge/k6-7D64FF.svg?style=for-the-badge&logo=k6&logoColor=white)
 ![Mercado Pago](https://img.shields.io/badge/Mercado%20Pago-00B1EA.svg?style=for-the-badge&logo=Mercado-Pago&logoColor=white)
+
+</div>
 
 ## 💫 Arquitetura
 
