@@ -1,7 +1,7 @@
 import http from 'k6/http';
 import { sleep } from 'k6';
 
-var multiplyFactor = 15
+var multiplyFactor = 3
 
 export const options = {
   stages: [
@@ -19,6 +19,6 @@ export const options = {
 };
 
   export default function() {
-    http.get('http://a8e0d0f878a604c1791119251f84c344-1622608272.us-east-1.elb.amazonaws.com/api/v1/products?category=MAIN_COURSE&page=0&size=10');
+    http.get('http://aa41b21f68e1742e2a66fe97b32c42ef-1021599843.us-east-1.elb.amazonaws.com/api/v1/products?category=MAIN_COURSE&page=0&size=10');
     sleep(1);
   }

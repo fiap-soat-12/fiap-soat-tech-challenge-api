@@ -133,17 +133,23 @@ rodar o seguinte comando: `docker compose up -d`
 ![Docker compose detached mode](./assets/compose_detached_mode.png)
 </details>
 
-<details>
+<details style="cursor: pointer;">
  <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Subindo aplicação em Cluster Kubernetes local (Ex: Docker Desktop ou Minikube)</summary>
  <br>
+
+ Uma outra forma de subir a aplicação, é fazendo uso dos manifestos kubernetes presentes na pasta `/infra/k8s` e implantar os recursos em um cluster K8S local. Para realizar isso, basta seguir os passos a seguir:
   
-  1. Certificar que o Cluster local esteja executando;
-  2. Certificar que o Terraform esteja instalado;
+  1. Certificar que o Cluster local esteja executando (Para o exemplo do minikube, basta rodar os comandos `minikube start` para inicializar o cluster e `minikube status` para verificar o status do cluster);
+  ![minikube-start-status](./assets/minikube-start-status.png)
+  
+  2. Certificar que o Terraform esteja instalado executando o comando `terraform --version`;
+  ![terraform-version](./assets/terraform-version.png)
+
   3. Entrar na pasta `infra/terraform`;
   4. Inicializar o Terraform no projeto `terraform init`;
   5. Verificar que o script do Terraform é valido rodando o comando `terraform validate`;
-  6. Executar o comando `terraform plan` para executar o planejamento da execução/implementação;
-  7. Executar o comando `terraform apply` para criar a infra dentro do cluster;
+  6. Executar o comando `terraform plan -var-file="./inventories/minikube/terraform.tfvars"` para executar o planejamento da execução/implementação. No caso da execução em um cluster kubernetes do `Docker Desktop`, basta executar o comando `terraform plan`, sem adicionar o caminho para o arquivo de variáveis;
+  7. Executar o comando `terraform apply  -var-file="./inventories/minikube/terraform.tfvars"` para criar a infra dentro do cluster;
 
   Para acessar a aplicação, será necessário acessar a rota através do IP Público do service do ingress. Esse passo é muda de acordo com o Cluster local que você estiver utilizando:
   Caso esteja utilizando Docker Desktop:
@@ -152,30 +158,47 @@ rodar o seguinte comando: `docker compose up -d`
 
   Caso esteja utilizando MiniKube:
   1. Executar o comando `minikube tunnel`;
+  ![minikube-tunnel](./assets/minikube-tunnel.png)
   2. Executar o comando `kubectl get svc -n nginx -ingress`;
+  ![get-ingress-svc](./assets/get-ingress-svc.png)
   3. Verificar o IP Externo do service e acessar a aplicação utilizando o mesmo;
+  ![open-api-minikube-ip](./assets/open-api-minikube-ip.png)
 
 </details>
 
-<details>
+<details style="cursor: pointer;">
   <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Subindo aplicação em Cluster EKS</summary>
   <br>
   
-  1. Certificar que o Terraform esteja instalado;
+  1. Certificar que o Terraform esteja instalado executando o comando `terraform --version`;
+  ![terraform-version](./assets/terraform-version.png)
   2. Certificar que o `aws cli` está instalado e configurado com as credenciais da sua conta AWS;
+  ![aws-cli-version](./assets/aws-cli-version.png)
   3. Acessar a pasta `infra/eks/cluster` que contém os arquivos que irão criar um Cluster EKS e Work Nodes na AWS;
   4. Inicializar o Terraform no projeto `terraform init`;
   5. Verificar que o script do Terraform é valido rodando o comando `terraform validate`;
   6. Executar o comando `terraform plan` para executar o planejamento da execução/implementação;
   7. Executar o comando `terraform apply` para criar a infra dentro do cluster;
   8. Após a execução do Terraform finalizar, verificar se o cluster e os nodes foram inicializados na AWS;
+  ![eks-cluster](./assets/eks-cluster.png)
   9. Acessar a pasta `infra/eks/infra` que contém os arquivos que irão criar os Pods da aplicação e do Banco de Dados, os services e os recursos relacionados à monitoração na AWS;
   10. Inicializar o Terraform no projeto `terraform init`;
   11. Verificar que o script do Terraform é valido rodando o comando `terraform validate`;
   12. Executar o comando `terraform plan` para executar o planejamento da execução/implementação;
   13. Executar o comando `terraform apply` para criar a infra dentro do cluster;
+  14. Após a execução do Terraform finalizar, verificar se os recursos foram criados corretamente na conta AWS;
 
   Para acessar a aplicação, basta acessar o serviço Load Balancer na AWS, copiar o DNS do load balancer que foi criado e acessar as rotas da aplicação utilizando o DNS gerado.
+  ![load-balancer-dns](./assets/load-balancer-dns.png)
+  ![open-api-load-balancer-dns](./assets/open-api-load-balancer-dns.png)
+
+  Também é possível acessar os dashs do grafana utilizando a mesma dns do load balancer: `<load-balancer-dns>/grafana/login`
+  ![grafana-load-balancer-dns](./assets/grafana-load-balancer-dns.png)
+
+  As credenciais de acesso ao grafana são:
+
+  username: `admin`
+  password: `techchallenge`
 </details>
 
 ### 🛒 Integração Checkout (Mercado Pago)
