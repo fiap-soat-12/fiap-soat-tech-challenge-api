@@ -153,13 +153,16 @@ rodar o seguinte comando: `docker compose up -d`
 
   Para acessar a aplicação, será necessário acessar a rota através do IP Público do service do ingress. Esse passo é muda de acordo com o Cluster local que você estiver utilizando:
   Caso esteja utilizando Docker Desktop:
-  1. Executar o comando `kubectl get svc -n nginx -ingress`;
-  2. Verificar //todo;
+  1. Executar o comando `kubectl get svc -n ingress-nginx`;
+  2. Verificar que o svc `nginx-ingress-ingress-nginx-controller` que é do tipo `LoadBalancer` está com o EXTERNAL-IP definido como `localhost`;
+  ![docker-desktop-get-svc-ingress](./assets/docker-desktop-get-svc-ingress.png)
+  3. Acessar a aplicação utilizando o localhost;
+  ![open-api-docker-desktop-localhost](./assets/open-api-docker-desktop-localhost.png)
 
   Caso esteja utilizando MiniKube:
   1. Executar o comando `minikube tunnel`;
   ![minikube-tunnel](./assets/minikube-tunnel.png)
-  2. Executar o comando `kubectl get svc -n nginx -ingress`;
+  2. Executar o comando `kubectl get svc -n ingress-nginx`;
   ![get-ingress-svc](./assets/get-ingress-svc.png)
   3. Verificar o IP Externo do service e acessar a aplicação utilizando o mesmo;
   ![open-api-minikube-ip](./assets/open-api-minikube-ip.png)
