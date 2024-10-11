@@ -156,14 +156,18 @@ rodar o seguinte comando: `docker compose up -d`
   1. Executar o comando `kubectl get svc -n ingress-nginx`;
   2. Verificar que o svc `nginx-ingress-ingress-nginx-controller` que é do tipo `LoadBalancer` está com o EXTERNAL-IP definido como `localhost`;
   ![docker-desktop-get-svc-ingress](./assets/docker-desktop-get-svc-ingress.png)
+
   3. Acessar a aplicação utilizando o localhost;
   ![open-api-docker-desktop-localhost](./assets/open-api-docker-desktop-localhost.png)
 
   Caso esteja utilizando MiniKube:
   1. Executar o comando `minikube tunnel`;
+
   ![minikube-tunnel](./assets/minikube-tunnel.png)
+
   2. Executar o comando `kubectl get svc -n ingress-nginx`;
   ![get-ingress-svc](./assets/get-ingress-svc.png)
+
   3. Verificar o IP Externo do service e acessar a aplicação utilizando o mesmo;
   ![open-api-minikube-ip](./assets/open-api-minikube-ip.png)
 
@@ -175,8 +179,10 @@ rodar o seguinte comando: `docker compose up -d`
   
   1. Certificar que o Terraform esteja instalado executando o comando `terraform --version`;
   ![terraform-version](./assets/terraform-version.png)
+
   2. Certificar que o `aws cli` está instalado e configurado com as credenciais da sua conta AWS;
   ![aws-cli-version](./assets/aws-cli-version.png)
+
   3. Acessar a pasta `infra/eks/cluster` que contém os arquivos que irão criar um Cluster EKS e Work Nodes na AWS;
   4. Inicializar o Terraform no projeto `terraform init`;
   5. Verificar que o script do Terraform é valido rodando o comando `terraform validate`;
@@ -184,6 +190,7 @@ rodar o seguinte comando: `docker compose up -d`
   7. Executar o comando `terraform apply` para criar a infra dentro do cluster;
   8. Após a execução do Terraform finalizar, verificar se o cluster e os nodes foram inicializados na AWS;
   ![eks-cluster](./assets/eks-cluster.png)
+
   9. Acessar a pasta `infra/eks/infra` que contém os arquivos que irão criar os Pods da aplicação e do Banco de Dados, os services e os recursos relacionados à monitoração na AWS;
   10. Inicializar o Terraform no projeto `terraform init`;
   11. Verificar que o script do Terraform é valido rodando o comando `terraform validate`;
