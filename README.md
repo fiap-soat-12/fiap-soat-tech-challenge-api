@@ -162,7 +162,6 @@ rodar o seguinte comando: `docker compose up -d`
 
   Caso esteja utilizando MiniKube:
   1. Executar o comando `minikube tunnel`;
-
   ![minikube-tunnel](./assets/minikube-tunnel.png)
 
   2. Executar o comando `kubectl get svc -n ingress-nginx`;
