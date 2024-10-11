@@ -173,9 +173,30 @@ rodar o seguinte comando: `docker compose up -d`
 
 ### 🛒 Integração Checkout (Mercado Pago)
 
-Nessa fase do projeto, integramos o Checkout com a API do Mercado Pago possibilitando o pagamento com o QR Code dinâmico.
+Nesta fase do projeto, integramos o Checkout com a API do Mercado Pago, possibilitando o pagamento via QR Code dinâmico.
 
-Para que possa seja criado o QR Code, deverá ser criado um pedido (POST) `v1/orders`. //todo
+Para que o QR Code seja criado, deve-se primeiro criar um pedido (POST) no endpoint `v1/orders`. Após a execução desse endpoint, uma chamada interna será feita para a API do Mercado Pago (POST) no endpoint `https://api.mercadopago.com/instore/orders/qr/seller/collectors/{user_id}/pos/{external_pos_id}/qrs` para gerar o QR Code. Com a string do QR gerada, o pagamento poderá ser realizado. Após a confirmação do pagamento ou a ocorrência de uma falha, receberemos uma requisição no nosso webhook (POST) `/v1/webhook-payment`. 
+
+Exemplo do recebimento do webhook mandado pelo Mercado Pago: 
+```bash
+{
+  "action": "payment.updated",
+  "api_version": "v1",
+  "data": {
+    "id": "123456"
+  },
+  "date_created": "2021-11-01T02:02:02Z",
+  "id": "123456",
+  "live_mode": false,
+  "type": "payment",
+  "user_id": 1986357239
+}
+```
+Em seguida, uma requisição será feita internamente para o endpoint (GET) `https://api.mercadopago.com/v1/payments/{id}` do Mercado Pago para verificar o status do pagamento. Se o status for `approved`, alteraremos o status do pedido na nossa aplicação para `PREPARING`.
+
+Caso ocorram falhas e o pagamento não seja efetivado dentro do intervalo de meia hora desde a criação do pedido, o pagamento não poderá ser realizado devido ao tempo de expiração, e o pedido será atualizado automaticamente para `FINISHED`. Isso será feito pelo nosso `Scheduled`, que buscará todos os pedidos com status `RECEIVED` criados há mais de meia hora e os atualizará para o status `FINISHED`.
+
+Observação: Deve-se considerar que nossa integração está sendo feita com o uso das contas de teste criadas no Mercado Pago.
 
 ### 📄 Documentação da API
 
