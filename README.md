@@ -126,6 +126,8 @@ A imagem docker desse projeto foi buildada através do arquivo `Dockerfile` pres
 container registry (Docker HUB). Para visualizá-la, basta acessar o
 link: https://hub.docker.com/r/willosouza/fiap-soat-tech-challenge
 
+Caso queira dar um pull na imagem, basta rodar o comando `docker pull willosouza/fiap-soat-tech-challenge:latest`, que a imagem mais recente será baixada.
+
 ### 🚀 Execução
 
 <details style="cursor: pointer;">
