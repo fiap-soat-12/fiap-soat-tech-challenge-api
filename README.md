@@ -188,7 +188,7 @@ rodar o seguinte comando: `docker compose up -d`
  <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Subindo aplicação em Cluster Kubernetes local (Ex: Docker Desktop ou Minikube)</summary>
  <br>
 
- Uma outra forma de subir a aplicação, é fazendo uso dos manifestos kubernetes presentes na pasta `/infra/k8s` e implantar os recursos em um cluster K8S local. Para realizar isso, basta seguir os passos a seguir:
+ Uma outra forma de subir a aplicação, é fazendo uso dos manifestos kubernetes (arquivos yaml) presentes na pasta `/infra/k8s` e implantar os recursos em um cluster K8S local. Para realizar isso, basta seguir os passos a seguir:
   
   1. Certificar que o Cluster local esteja executando (Para o exemplo do minikube, basta rodar os comandos `minikube start` para inicializar o cluster e `minikube status` para verificar o status do cluster);
   ![minikube-start-status](./assets/minikube-start-status.png)
