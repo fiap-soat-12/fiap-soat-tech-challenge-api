@@ -28,6 +28,16 @@ Este é um projeto que está em construção pelos desenvolvedores:
 Este monolito é responsável por gerenciar a entrada de pedidos de um restaurante. Ele lida com o processamento dos
 pedidos, gerenciamento de pagamentos e envio dos pedidos para a cozinha após a confirmação do pagamento.
 
+## 🎥 Vídeo de apresentação
+
+Para assistir ao vídeo de apresentação do projeto, que contém:
+- A descrição do problema
+- Arquitetura utilizada
+- Solução de infra estrutura proposta
+- Demonstração da aplicação em funcionamento
+
+basta acessar o link: <LINK_PARA_O_VIDEO_AQUI!!!!>
+
 ## 🛠 Tecnologias Utilizadas
 
 <div align="center">
@@ -49,11 +59,19 @@ pedidos, gerenciamento de pagamentos e envio dos pedidos para a cozinha após a 
 ![K6](https://img.shields.io/badge/k6-7D64FF.svg?style=for-the-badge&logo=k6&logoColor=white)
 ![Mercado Pago](https://img.shields.io/badge/Mercado%20Pago-00B1EA.svg?style=for-the-badge&logo=Mercado-Pago&logoColor=white)
 
+
 </div>
 
 ## 💫 Arquitetura
 
 O projeto segue a Clean Architecture, permitindo maior flexibilidade e facilidade de manutenção.
+
+### Desenho da arquitetura
+
+![Desenho de Arquitetura](./assets/fiap-techchallenge-k8s-infra.drawio.png)
+
+
+### Requisitos de negócio
 
 ## ⚙️ Configuração
 
@@ -214,7 +232,7 @@ rodar o seguinte comando: `docker compose up -d`
 
 Nesta fase do projeto, integramos o Checkout com a API do Mercado Pago, possibilitando o pagamento via QR Code dinâmico.
 
-Para que o QR Code seja criado, deve-se primeiro criar um pedido (POST) no endpoint `v1/orders`. Após a execução desse endpoint, uma chamada interna será feita para a API do Mercado Pago (POST) no endpoint `https://api.mercadopago.com/instore/orders/qr/seller/collectors/{user_id}/pos/{external_pos_id}/qrs` para gerar o QR Code. Com a string do QR gerada, o pagamento poderá ser realizado. Após a confirmação do pagamento ou a ocorrência de uma falha, receberemos uma requisição no nosso webhook (POST) `/v1/webhook-payment`. 
+Para que o QR Code seja criado, deve-se primeiro criar um pedido (POST) no endpoint `/api/v1/orders`. Após a execução desse endpoint, uma chamada interna será feita para a API do Mercado Pago (POST) no endpoint `https://api.mercadopago.com/instore/orders/qr/seller/collectors/{user_id}/pos/{external_pos_id}/qrs` para gerar o QR Code. Com a string do QR gerada, o pagamento poderá ser realizado. Após a confirmação do pagamento ou a ocorrência de uma falha, receberemos uma requisição no nosso webhook (POST) `/api/v1/webhook-payment`. 
 
 Exemplo do recebimento do webhook mandado pelo Mercado Pago: 
 ```bash
@@ -249,9 +267,26 @@ http://localhost:8357/api/swagger-ui/index.html
 rota-do-load-balancer/api/swagger-ui/index.html
 ```
 
-### Adicionar Desenhos
+### 🔃 Ordem de execução das APIs
 
-### Adicionar Diagramas
+1. O primeiro passo, que é opcional, seria realizar a criação de um novo usuário (cadasto de usuário) utilizando o endpoint (POST) `/api/v1/customers`
+2. Após o cadastro do usuário, o próximo passo, que também é opcional (pois nossa aplicação já fornece `seeds` no banco de dados, com produtos pré-cadastrados), seria realizar o cadastro de um novo produto através do endpoint (POST) `/api/v1/products`
+3. O próximo passo é realizar a listagem de todos os produtos por categoria através do endpoint (GET) `/api/v1/products`, para saber quais estão disponíveis
+4. Com os produtos escolhidos em mãos, o próximo passo é realizar a criação de um pedido através do endpoint (POST) `/api/v1/orders`, e salvar o código do QRCode retornado no response, para realizar o pagamento do mesmo posteriormente
+5. Após realizar a criação do pedido, é possível verificar se o mesmo foi criado através do endpoint (GET) `/api/v1/orders`. O mesmo deve estar listado no response dentro do status `received`
+6. O próximo passo será realizar o pagamento do pedido criado. Para realizar o pagamento do pedido, basta ler o QRCode gerado no passo 4 (Para realizar a leitura do mesmo, é necessário utilizar um site que transforma a string Pix em uma imagem QRCode, como por exemplo o [https://www.qrcode-monkey.com/](https://www.qrcode-monkey.com/)) e realizar o pagamento através do aplicativo do mercado pago (Pois a aplicação está integrada ao gateway de pagamentos do mercado pago)
+7. Após ter efetuado o pagamento do pedido, é possível verificar se o mesmo foi realmente pago realizando uma chamada ao endpoint (GET) `/api/v1/orders/{id}/paid-status`.
+8. Também é possível verificar que o status do pedido foi atualizado para `preparing` chamando novamente o endpoint (GET) `/api/v1/orders`;
+9. Para simular que a preparação do pedido foi finalizada pela cozinha, e que o pedido está pronto para ser retirado pelo cliente, basta chamar o endpoint (PATCH) `/api/v1/orders/{id}`
+10. Após isso, é possível verificar que o status do pedido foi atualizado para `ready` chamando novamente o endpoint (GET) `/api/v1/orders`;
+11. Finalizando a esteira de entrega do pedido, é possível simular o ato de retirada do mesmo pelo cliente, realizando uma nova chamada ao endpoint (PATCH) `/api/v1/orders/{id}`
+12. E como último passo, é possível verificar novamente o status do pedido utilizando o endpoint (GET) `/api/v1/orders`. Neste caso, como o pedido foi atualizado para o status `finished`, o mesmo não deve mais estar sendo exibido no retorno do endpoint chamado.
+
+Além dos endpoints listados acima, existem outros que não fazem parte do fluxo padrão da aplicação, mas que podem ser utilizados:
+1. É possível realizar uma chamada ao endpoint (PUT) `/api/v1/products/{id}` para realizar a atualização de um produto qualquer (Que já tenha sido criado)
+2. É possível realizar uma chamada ao endpoint (DELETE) `/api/v1/products/{id}` para realizar a exclusão de um produto qualquer (Que exista)
+3. Existe um endpoint que não é chamado diretamente pelo cliente, que é o `/api/v1/webhook-payment`. Este endpoint é responsável por receber a resposta do gateway de pagamentos, relacioada a ação de pagamento do pedido (Pagamento realizado, ou falha no pagamento)
+4. Caso queira, é possível verificar se o usuário foi cadastrado e também ver o detalhamento das informações do usuário através do endpoint (GET) `/api/v1/customers/{document}`
 
 ### 🎲 Seeds
 
