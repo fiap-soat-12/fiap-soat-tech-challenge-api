@@ -28,12 +28,16 @@ Este é um projeto que está em construção pelos desenvolvedores:
 Este monolito é responsável por gerenciar a entrada de pedidos de um restaurante. Ele lida com o processamento dos
 pedidos, gerenciamento de pagamentos e envio dos pedidos para a cozinha após a confirmação do pagamento.
 
+### ⚠️ Problema
+
+<p align="justify">Uma lanchonete em expansão enfrenta dificuldades em gerenciar pedidos de forma eficiente sem um sistema adequado, o que pode causar confusão, atrasos e insatisfação dos clientes. Pedidos complexos, como hambúrgueres personalizados, podem ser mal interpretados ou esquecidos, impactando negativamente os negócios. Para resolver esse problema, a lanchonete vai investir em um sistema de autoatendimento, permitindo que os clientes façam pedidos diretamente, sem depender de atendentes, otimizando o processo e melhorando a experiência dos clientes.</p>
+
 ## 🎥 Vídeo de apresentação
 
 Para assistir ao vídeo de apresentação do projeto, que contém:
-- A descrição do problema
-- Arquitetura utilizada
-- Solução de infra estrutura proposta
+- A descrição detalhada do problema
+- Arquitetura utilizada no projeto
+- Solução de infraestrutura proposta
 - Demonstração da aplicação em funcionamento
 
 basta acessar o link: <LINK_PARA_O_VIDEO_AQUI!!!!>
@@ -50,12 +54,13 @@ basta acessar o link: <LINK_PARA_O_VIDEO_AQUI!!!!>
 
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white)
-![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
-![Helm](https://img.shields.io/badge/Helm-0F1689.svg?style=for-the-badge&logo=Helm&logoColor=white)
 ![EKS](https://img.shields.io/badge/Amazon%20EKS-FF9900.svg?style=for-the-badge&logo=Amazon-EKS&logoColor=white)
 
-![Prometheus](https://img.shields.io/badge/Prometheus-E6522C.svg?style=for-the-badge&logo=Prometheus&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
+![Helm](https://img.shields.io/badge/Helm-0F1689.svg?style=for-the-badge&logo=Helm&logoColor=white)
 ![Grafana](https://img.shields.io/badge/Grafana-F46800.svg?style=for-the-badge&logo=Grafana&logoColor=white)
+![Prometheus](https://img.shields.io/badge/Prometheus-E6522C.svg?style=for-the-badge&logo=Prometheus&logoColor=white)
+
 ![K6](https://img.shields.io/badge/k6-7D64FF.svg?style=for-the-badge&logo=k6&logoColor=white)
 ![Mercado Pago](https://img.shields.io/badge/Mercado%20Pago-00B1EA.svg?style=for-the-badge&logo=Mercado-Pago&logoColor=white)
 
@@ -68,10 +73,38 @@ O projeto segue a Clean Architecture, permitindo maior flexibilidade e facilidad
 
 ### Desenho da arquitetura
 
-![Desenho de Arquitetura](./assets/fiap-techchallenge-k8s-infra.drawio.png)
+![Desenho de Arquitetura](./assets/diagrams/DiagramaDeArquitetura.drawio.png)
 
+### Desenho da infraestrutura
 
-### Requisitos de negócio
+![Desenho da Infraestrutura](./assets/fiap-techchallenge-k8s-infra.drawio.png)
+
+### Diagramas sequenciais
+
+<details style="cursor: pointer;">
+ <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Diagrama sequencial de customers </summary>
+ <br>
+ 
+ ![Cadastro do Customer](./assets/diagrams/DiagramaDeSequenciaCustomers.drawio.png)
+
+</details>
+
+<details style="cursor: pointer;">
+ <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Diagrama sequencial de products </summary>
+ <br>
+ 
+ ![Cadastro e listagem de produtos](./assets/diagrams/DiagramaDeSequenciaProdutos.drawio.png)
+
+</details>
+
+<details style="cursor: pointer;">
+ <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Diagrama sequencial de orders </summary>
+ <br>
+ 
+ ![Criação de pedidos](./assets/diagrams/DiagramaDeSequenciaCriacaoPedido.drawio.png)
+ ![Listagem de pedidos](./assets/diagrams/DiagramaDeSequenciaConsultarPedidos.drawio.png)
+
+</details>
 
 ## ⚙️ Configuração
 
@@ -232,7 +265,7 @@ rodar o seguinte comando: `docker compose up -d`
 
 Nesta fase do projeto, integramos o Checkout com a API do Mercado Pago, possibilitando o pagamento via QR Code dinâmico.
 
-Para que o QR Code seja criado, deve-se primeiro criar um pedido (POST) no endpoint `/api/v1/orders`. Após a execução desse endpoint, uma chamada interna será feita para a API do Mercado Pago (POST) no endpoint `https://api.mercadopago.com/instore/orders/qr/seller/collectors/{user_id}/pos/{external_pos_id}/qrs` para gerar o QR Code. Com a string do QR gerada, o pagamento poderá ser realizado. Após a confirmação do pagamento ou a ocorrência de uma falha, receberemos uma requisição no nosso webhook (POST) `/api/v1/webhook-payment`. 
+Para que o QR Code seja criado, deve-se primeiro criar um pedido (POST) no endpoint `/api/v1/orders`. Após a execução desse endpoint, uma chamada interna será feita para a API do Mercado Pago (POST) no endpoint `https://api.mercadopago.com/instore/orders/qr/seller/collectors/{user_id}/pos/{external_pos_id}/qrs` para gerar o QR Code. Com a string do QR gerada, o pagamento poderá ser realizado. Após a confirmação do pagamento ou a ocorrência de uma falha, receberemos uma requisição no nosso webhook (POST) `/api/v1/webhook-payment`.
 
 Exemplo do recebimento do webhook mandado pelo Mercado Pago: 
 ```bash
