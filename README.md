@@ -305,7 +305,7 @@ http://localhost/api/swagger-ui/index.html
 http://<external_ip_do_service_do_nginx>/api/swagger-ui/index.html
 
 # Ambiente AWS via cluster EKS
-https://<endereço_dns_do_load_balancer>/api/swagger-ui/index.html
+http://<endereço_dns_do_load_balancer>/api/swagger-ui/index.html
 ```
 
 ### 🔃 Ordem de execução das APIs
