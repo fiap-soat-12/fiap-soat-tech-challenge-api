@@ -295,11 +295,17 @@ Observação: Deve-se considerar que nossa integração está sendo feita com o 
 Link para acessar ao swagger após subir a aplicação:
 
 ```bash
-# Ambiente Local
+# Ambiente Local via docker compose
 http://localhost:8357/api/swagger-ui/index.html
 
-# Ambiente EKS
-rota-do-load-balancer/api/swagger-ui/index.html
+# Ambiente Local via cluster kubernetes do docker desktop
+http://localhost/api/swagger-ui/index.html
+
+# Ambiente Local via cluster kubernetes do minikube
+http://<external_ip_do_service_do_nginx>/api/swagger-ui/index.html
+
+# Ambiente AWS via cluster EKS
+https://<endereço_dns_do_load_balancer>/api/swagger-ui/index.html
 ```
 
 ### 🔃 Ordem de execução das APIs
