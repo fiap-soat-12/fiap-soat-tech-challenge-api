@@ -223,6 +223,26 @@ rodar o seguinte comando: `docker compose up -d`
   3. Verificar o IP Externo do service e acessar a aplicação utilizando o mesmo;
   ![open-api-minikube-ip](./assets/open-api-minikube-ip.png)
 
+  Outra forma de realizar o deploy da aplicação, é utilizando os shell scripts que estão dentro da pasta `/infra/k8s`. Para subir os recursos do k8s, basta seguir a seguinte ordem de execução:
+
+  1. Garantir que tem o helm instalado em sua máquina rodando o comando `helm version`
+  ![helm-version](./assets/helm-version.png)
+
+  2. Executar os shell scripts
+  ```bash
+  # Para subir os recursos do namespace techchallenge
+  $ ./apply-techchallenge.sh
+
+  # Para subir o metric server no namespace kube-system
+  $ ./apply-kube-system.sh
+
+  # Para subir o prometheus e o grafana no namespace monitoring
+  $ ./apply-monitoring.sh
+
+  # Para subir o nginx controller no namespace nginx-ingress
+  $ ./apply-nginx-ingress
+  ```
+
 </details>
 
 <details style="cursor: pointer;">
