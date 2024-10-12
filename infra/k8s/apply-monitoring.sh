@@ -66,4 +66,8 @@ helm upgrade --install grafana grafana/grafana \
   --wait \
   --timeout 600s
 
+# Apply ingress after namespace and helm chart
+echo -e "\nApplying ingress..."
+kubectl apply -f "$BASE_DIR/grafana/grafana-ingress.yaml"
+
 echo -e "\n All resources applied successfully."
