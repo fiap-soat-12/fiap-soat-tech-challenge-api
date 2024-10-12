@@ -242,13 +242,13 @@ rodar o seguinte comando: `docker compose up -d`
   7. Executar o comando `terraform apply` para criar a infra dentro do cluster;
   8. Após a execução do Terraform finalizar, verificar se o cluster e os nodes foram inicializados na AWS;
   ![eks-cluster](./assets/eks-cluster.png)
-
-  9. Acessar a pasta `infra/eks/infra` que contém os arquivos que irão criar os Pods da aplicação e do Banco de Dados, os services e os recursos relacionados à monitoração na AWS;
-  10. Inicializar o Terraform no projeto `terraform init`;
-  11. Verificar que o script do Terraform é valido rodando o comando `terraform validate`;
-  12. Executar o comando `terraform plan` para executar o planejamento da execução/implementação;
-  13. Executar o comando `terraform apply` para criar a infra dentro do cluster;
-  14. Após a execução do Terraform finalizar, verificar se os recursos foram criados corretamente na conta AWS;
+  9. Após a criação do cluster, é necessário configurar o kubeconfig para que o `kubectl` aponte para o novo cluster criado na AWS. Para fazer isso, basta executar o comando `aws eks update-kubeconfig --region us-east-1 --name fiap-tech-challenge-eks-cluster`. A region escolhida para que o cluster seja criado foi a `us-east-1` e o nome do cluster é `fiap-tech-challenge-eks-cluster`
+  10. Acessar a pasta `infra/eks/infra` que contém os arquivos que irão criar os Pods da aplicação e do Banco de Dados, os services e os recursos relacionados à monitoração na AWS;
+  11. Inicializar o Terraform no projeto `terraform init`;
+  12. Verificar que o script do Terraform é valido rodando o comando `terraform validate`;
+  13. Executar o comando `terraform plan` para executar o planejamento da execução/implementação;
+  14. Executar o comando `terraform apply` para criar a infra dentro do cluster;
+  15. Após a execução do Terraform finalizar, verificar se os recursos foram criados corretamente na conta AWS;
 
   Para acessar a aplicação, basta acessar o serviço Load Balancer na AWS, copiar o DNS do load balancer que foi criado e acessar as rotas da aplicação utilizando o DNS gerado.
   ![load-balancer-dns](./assets/load-balancer-dns.png)
