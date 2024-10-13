@@ -40,7 +40,7 @@ Para assistir ao vídeo de apresentação do projeto, que contém:
 - Solução de infraestrutura proposta
 - Demonstração da aplicação em funcionamento
 
-basta acessar o link: <LINK_PARA_O_VIDEO_AQUI!!!!>
+basta acessar o link: [Apresentação no Youtube](https://www.youtube.com/watch?v=zUr-sm5-51s&t=84s)
 
 ## 🛠 Tecnologias Utilizadas
 
