@@ -187,7 +187,7 @@ rodar o seguinte comando: `docker compose up -d`
 </details>
 
 <details style="cursor: pointer;">
- <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Subindo aplicação em Cluster Kubernetes local (Ex: Docker Desktop ou Minikube)</summary>
+ <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Subindo aplicação em Cluster Kubernetes local (Ex: Docker Desktop ou Minikube) utilizando terraform</summary>
  <br>
 
  Uma outra forma de subir a aplicação, é fazendo uso dos manifestos kubernetes (arquivos yaml) presentes na pasta `/infra/k8s` e implantar os recursos em um cluster K8S local. Para realizar isso, basta seguir os passos a seguir:
@@ -223,6 +223,12 @@ rodar o seguinte comando: `docker compose up -d`
   3. Verificar o IP Externo do service e acessar a aplicação utilizando o mesmo;
   ![open-api-minikube-ip](./assets/open-api-minikube-ip.png)
 
+</details>
+
+<details style="cursor: pointer;">
+ <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Subindo aplicação em Cluster Kubernetes local utilizando shell scripts</summary>
+ <br>
+
   Outra forma de realizar o deploy da aplicação, é utilizando os shell scripts que estão dentro da pasta `/infra/k8s`. Para subir os recursos do k8s, basta seguir a seguinte ordem de execução:
 
   1. Garantir que tem o helm instalado em sua máquina rodando o comando `helm version`
@@ -241,6 +247,108 @@ rodar o seguinte comando: `docker compose up -d`
 
   # Para subir o nginx controller no namespace nginx-ingress
   $ ./apply-nginx-ingress
+  ```
+
+</details>
+
+<details style="cursor: pointer;">
+ <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Subindo aplicação em Cluster Kubernetes local utilizando kubectl e helm</summary>
+ <br>
+
+ Também é possível realizar o deploy da aplicação rodando o comando `kubectl apply -f <manifesto>` para cada aquivo yaml presente nas subpastas de `/infra/k8s`. Para que o deploy seja realizado dessa forma, é necessário seguir a seguinte ordem de execução:
+
+  1. Garantir que tem o helm instalado em sua máquina rodando o comando `helm version`
+  ![helm-version](./assets/helm-version.png)
+
+  2. Executar os seguintes comandos na ordem apresentada:
+  ```bash
+  # Criar o namespace techchallenge
+  $ kubectl apply -f "techchallenge/namespace.yaml"
+
+  # Criar o secrets
+  $ kubectl apply -f "techchallenge/secret/tech-challenge-secret.yaml"
+
+  # Criar o storage class
+  $ kubectl apply -f "techchallenge/storageclass/tech-challenge-storage-class.yaml"
+
+  # Criar o persistent volume
+  $ kubectl apply -f "techchallenge/pv/tech-challenge-persistent-volume.yaml"
+
+  # Criar o persistent volume claim
+  $ kubectl apply -f "techchallenge/pvc/tech-challenge-persistent-volume-claim.yaml"
+
+  # Criar o statefulset
+  $ kubectl apply -f "techchallenge/statefulset/tech-challenge-statefulset.yaml"
+
+  # Criar o deployment
+  $ kubectl apply -f "techchallenge/deployment/tech-challenge-app-deployment.yaml"
+
+  # Criar o service do statefulset
+  $ kubectl apply -f "techchallenge/service/tech-challenge-db-service.yaml"
+
+  # Criar o service do deployment
+  $ kubectl apply -f "techchallenge/service/tech-challenge-app-service.yaml"
+
+  # Criar o service do deployment
+  $ kubectl apply -f "techchallenge/ingress/tech-challenge-ingress.yaml"
+
+  # Criar o horizontal pod autoscaler
+  $ kubectl apply -f "techchallenge/ingress/tech-challenge-app-hpa.yaml"
+
+  # Criar o horizontal pod autoscaler
+  $ kubectl apply -f "techchallenge/ingress/tech-challenge-app-hpa.yaml"
+
+  # Implantar o helm chart do metrics server
+  $ helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
+  $ helm repo update
+  $ helm upgrade --install metrics-server metrics-server/metrics-server \
+    --namespace kube-system \
+    --version 3.12.1 \
+    --values "$kube-system/values.yaml" \
+    --wait \
+    --timeout 600s
+
+  # Criar o namespace monitoring
+  $ kubectl apply -f "monitoring/namespace.yaml"
+
+  # Implantar o helm chart do prometheus
+  $ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+  $ helm repo update
+  $ helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
+    --namespace monitoring \
+    --version 51.2.0 \
+    --values "monitoring/kube-prometheus-stack/values.yaml" \
+    --wait \
+    --timeout 600s
+
+  # Criar o config map do Grafana
+  $ kubectl apply -f "monitoring/grafana/configmap.yaml"
+
+  # Implantar o helm chart do prometheus
+  $ helm repo add grafana https://grafana.github.io/helm-charts
+  $ helm repo update
+  $ helm upgrade --install grafana grafana/grafana \
+    --namespace monitoring \
+    --version 8.5.1 \
+    --values "$BASE_DIR/grafana/values.yaml" \
+    --wait \
+    --timeout 600s
+
+  # Criar o ingress do grafana
+  $ kubectl apply -f "monitoring/grafana/grafana-ingress.yaml
+
+  # Criar o namespace do nginx-ingress
+  $ kubectl apply -f "nginx-ingress/namespace.yaml"
+
+  # Implantar o helm chart do nginx ingress
+  $ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+  $ helm repo update
+  $ helm upgrade --install nginx-ingress ingress-nginx/ingress-nginx \
+    --namespace ingress-nginx \
+    --version 4.11.2 \
+    --values "nginx-ingress/values.yaml" \
+    --wait \
+    --timeout 600s
   ```
 
 </details>
