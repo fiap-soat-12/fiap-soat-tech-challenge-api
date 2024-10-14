@@ -293,7 +293,7 @@ rodar o seguinte comando: `docker compose up -d`
   $ kubectl apply -f "techchallenge/ingress/tech-challenge-ingress.yaml"
 
   # Criar o horizontal pod autoscaler
-  $ kubectl apply -f "techchallenge/ingress/tech-challenge-app-hpa.yaml"
+  $ kubectl apply -f "techchallenge/hpa/tech-challenge-app-hpa.yaml"
 
   # Criar o horizontal pod autoscaler
   $ kubectl apply -f "techchallenge/ingress/tech-challenge-app-hpa.yaml"
