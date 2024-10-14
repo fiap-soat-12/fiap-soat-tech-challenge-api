@@ -289,14 +289,11 @@ rodar o seguinte comando: `docker compose up -d`
   # Criar o service do deployment
   $ kubectl apply -f "techchallenge/service/tech-challenge-app-service.yaml"
 
-  # Criar o service do deployment
-  $ kubectl apply -f "techchallenge/ingress/tech-challenge-ingress.yaml"
-
   # Criar o horizontal pod autoscaler
   $ kubectl apply -f "techchallenge/hpa/tech-challenge-app-hpa.yaml"
 
-  # Criar o horizontal pod autoscaler
-  $ kubectl apply -f "techchallenge/ingress/tech-challenge-app-hpa.yaml"
+  # Criar o ingress
+  $ kubectl apply -f "techchallenge/ingress/tech-challenge-ingress.yaml"
 
   # Implantar o helm chart do metrics server
   $ helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
@@ -304,7 +301,7 @@ rodar o seguinte comando: `docker compose up -d`
   $ helm upgrade --install metrics-server metrics-server/metrics-server \
     --namespace kube-system \
     --version 3.12.1 \
-    --values "$kube-system/values.yaml" \
+    --values "kube-system/values.yaml" \
     --wait \
     --timeout 600s
 
@@ -330,7 +327,7 @@ rodar o seguinte comando: `docker compose up -d`
   $ helm upgrade --install grafana grafana/grafana \
     --namespace monitoring \
     --version 8.5.1 \
-    --values "$BASE_DIR/grafana/values.yaml" \
+    --values "monitoring/grafana/values.yaml" \
     --wait \
     --timeout 600s
 
