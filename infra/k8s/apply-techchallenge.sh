@@ -45,11 +45,16 @@ for storageclass in "$BASE_DIR/storageclass"/*.yaml; do
   kubectl apply -f "$storageclass"
 done
 
-# Apply persistent volume
-echo -e "\nApplying PV and PVC..."
-for persistentvolume in "$BASE_DIR/persistentvolume"/*.yaml; do
+echo -e "\nApplying PV..."
+for persistentvolume in "$BASE_DIR/pv"/*.yaml; do
   echo "Applying $persistentvolume..."
   kubectl apply -f "$persistentvolume"
+done
+
+echo -e "\nApplying PVC..."
+for persistentvolumeclaim in "$BASE_DIR/pvc"/*.yaml; do
+  echo "Applying $persistentvolumeclaim..."
+  kubectl apply -f "$persistentvolumeclaim"
 done
 
 # Apply stateful set
