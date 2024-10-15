@@ -332,7 +332,7 @@ rodar o seguinte comando: `docker compose up -d`
     --timeout 600s
 
   # Criar o ingress do grafana
-  $ kubectl apply -f "monitoring/grafana/grafana-ingress.yaml
+  $ kubectl apply -f "monitoring/grafana/grafana-ingress.yaml"
 
   # Criar o namespace do nginx-ingress
   $ kubectl apply -f "nginx-ingress/namespace.yaml"
