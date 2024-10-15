@@ -353,6 +353,8 @@ rodar o seguinte comando: `docker compose up -d`
 <details style="cursor: pointer;">
   <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Subindo aplicação em Cluster EKS</summary>
   <br>
+
+  Caso deseje subir a aplicação em um cluster EKS em uma conta AWS, basta seguir os seguintes passos:
   
   1. Certificar que o Terraform esteja instalado executando o comando `terraform --version`;
   ![terraform-version](./assets/terraform-version.png)
