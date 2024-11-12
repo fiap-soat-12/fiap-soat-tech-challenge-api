@@ -10,7 +10,7 @@ on:
 
 jobs:
   # Job para verificação de build e testes unitários em pull requests
-  test:
+  build-and-test:
     name: Build and Test
     runs-on: ubuntu-latest
 
@@ -27,3 +27,40 @@ jobs:
       - name: Build and run tests
         run: |
           mvn clean install  # Comando para build e testes com Maven
+
+  # Job para construir a imagem Docker e fazer o push para o ECR
+  build-and-push-ecr:
+    name: Build and Push Docker Image to ECR
+    runs-on: ubuntu-latest
+    needs: build-and-test # Garante que só será executado após os testes passarem
+
+    env:
+      ECR_REPOSITORY: fiap-soat-tech-challenge-api # Nome do repositório e da imagem
+      AWS_REGION: us-east-1                        # Região da AWS configurada como us-east-1
+      IMAGE_TAG: latest                            # Tag para a imagem Docker (pode ser ajustada)
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Log in to Amazon ECR
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+          aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+          aws configure set default.region $AWS_REGION
+          aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin "${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com"
+
+      - name: Build Docker image
+        run: |
+          docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
+
+      - name: Tag Docker image for ECR
+        run: |
+          docker tag $ECR_REPOSITORY:$IMAGE_TAG "${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG"
+
+      - name: Push Docker image to Amazon ECR
+        run: |
+          docker push "${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG"
