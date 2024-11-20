@@ -1,4 +1,4 @@
-name: Build Docker Image Deploy to AWS
+name: Build and Docker Image Deploy to AWS
 
 on:
   pull_request:
