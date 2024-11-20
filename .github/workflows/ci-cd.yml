@@ -23,6 +23,7 @@ jobs:
       - name: Build and run tests
         run: |
           mvn clean install  # Comando para build e testes com Maven
+ 
   # Job para criação e push da imagem Docker para ECR
   build-and-push-ecr:
     name: Build and Push Docker Image to ECR
@@ -36,6 +37,7 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
+      
       # Passo para verificar e criar o repositório no ECR, caso necessário
       - name: Create ECR repository if it doesn't exist
         env:
@@ -48,6 +50,7 @@ jobs:
           aws configure set aws_session_token $AWS_SESSION_TOKEN
           aws configure set default.region $AWS_REGION
           aws ecr describe-repositories --repository-name $ECR_REPOSITORY || aws ecr create-repository --repository-name $ECR_REPOSITORY --region $AWS_REGION
+      
       # Passo para realizar o login no ECR
       - name: Log in to Amazon ECR
         env:
@@ -60,10 +63,12 @@ jobs:
           aws configure set aws_session_token $AWS_SESSION_TOKEN
           aws configure set default.region $AWS_REGION
           aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin "${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com"
+      
       # Passo para construir a imagem Docker
       - name: Build Docker image
         run: |
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
+          
       # Passo para marcar a imagem com a tag adequada para o ECR
       - name: Tag Docker image for ECR
         run: |
