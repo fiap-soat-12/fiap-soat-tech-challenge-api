@@ -294,7 +294,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "LambdaAuthorizer": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
