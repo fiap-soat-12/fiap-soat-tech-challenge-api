@@ -1,46 +1,17 @@
 <div align="center">
 
-# Pós Tech FIAP - Tech Challenge - Grupo 12
+# Tech Challenge - API
 
-![GitHub Release Date](https://img.shields.io/badge/Release%20Date-Outubro%202024-yellowgreen)
+![GitHub Release Date](https://img.shields.io/badge/Release%20Date-Dezembro%202024-yellowgreen)
 ![](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellowgreen)
 <br>
-![](https://img.shields.io/badge/Version-%20v2.0.0-brightgreen)
+![](https://img.shields.io/badge/Version-%20v3.0.0-brightgreen)
 </div>
-
-### 👨‍💼👩‍💼‍ Autores
-
-Este é um projeto que está em construção pelos desenvolvedores:
-
-![](https://img.shields.io/badge/RM357321-Alexandre%20Miranda-blue)
-<br>
-![](https://img.shields.io/badge/RM357437-Diego%20Ceccon-blue)
-<br>
-![](https://img.shields.io/badge/RM357218-Jéssica%20Rodrigues%20-blue)
-<br>
-![](https://img.shields.io/badge/RM358002-Rodrigo%20Sartori-blue)
-<br>
-![](https://img.shields.io/badge/RM357991-Wilton%20Souza%20-blue)
-
 
 ## 💻 Descrição
 
 Este monolito é responsável por gerenciar a entrada de pedidos de um restaurante. Ele lida com o processamento dos
 pedidos, gerenciamento de pagamentos e envio dos pedidos para a cozinha após a confirmação do pagamento.
-
-### ⚠️ Problema
-
-<p align="justify">Uma lanchonete em expansão enfrenta dificuldades em gerenciar pedidos de forma eficiente sem um sistema adequado, o que pode causar confusão, atrasos e insatisfação dos clientes. Pedidos complexos, como hambúrgueres personalizados, podem ser mal interpretados ou esquecidos, impactando negativamente os negócios. Para resolver esse problema, a lanchonete vai investir em um sistema de autoatendimento, permitindo que os clientes façam pedidos diretamente, sem depender de atendentes, otimizando o processo e melhorando a experiência dos clientes.</p>
-
-## 🎥 Vídeo de apresentação
-
-Para assistir ao vídeo de apresentação do projeto, que contém:
-- A descrição detalhada do problema
-- Arquitetura utilizada no projeto
-- Solução de infraestrutura proposta
-- Demonstração da aplicação em funcionamento
-
-basta acessar o link: [Apresentação no Youtube](https://youtu.be/zUr-sm5-51s?si=EF7GhyJjunh973iZ)
 
 ## 🛠 Tecnologias Utilizadas
 
@@ -51,17 +22,7 @@ basta acessar o link: [Apresentação no Youtube](https://youtu.be/zUr-sm5-51s?s
 ![Maven](https://img.shields.io/badge/Apache%20Maven-C71A36.svg?style=for-the-badge&logo=Apache-Maven&logoColor=white)
 ![Postgres](https://img.shields.io/badge/PostgreSQL-4169E1.svg?style=for-the-badge&logo=PostgreSQL&logoColor=white)
 ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
-
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Kubernetes](https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white)
-![EKS](https://img.shields.io/badge/Amazon%20EKS-FF9900.svg?style=for-the-badge&logo=Amazon-EKS&logoColor=white)
-
-![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
-![Helm](https://img.shields.io/badge/Helm-0F1689.svg?style=for-the-badge&logo=Helm&logoColor=white)
-![Grafana](https://img.shields.io/badge/Grafana-F46800.svg?style=for-the-badge&logo=Grafana&logoColor=white)
-![Prometheus](https://img.shields.io/badge/Prometheus-E6522C.svg?style=for-the-badge&logo=Prometheus&logoColor=white)
-
-![K6](https://img.shields.io/badge/k6-7D64FF.svg?style=for-the-badge&logo=k6&logoColor=white)
 ![Mercado Pago](https://img.shields.io/badge/Mercado%20Pago-00B1EA.svg?style=for-the-badge&logo=Mercado-Pago&logoColor=white)
 
 
@@ -74,10 +35,6 @@ O projeto segue a Clean Architecture, permitindo maior flexibilidade e facilidad
 ### Desenho da arquitetura
 
 ![Desenho de Arquitetura](./assets/diagrams/DiagramaDeArquitetura.drawio.png)
-
-### Desenho da infraestrutura
-
-![Desenho da Infraestrutura](./assets/fiap-techchallenge-k8s-infra.drawio.png)
 
 ### Diagramas sequenciais
 
@@ -116,17 +73,11 @@ O projeto segue a Clean Architecture, permitindo maior flexibilidade e facilidad
 - **[Maven 3.6.3+](https://maven.apache.org/)**: Site oficial do Maven.
 - **[Docker](https://www.docker.com/)**: Site oficial do Docker.
 - **[Docker Compose](https://docs.docker.com/compose/)**: Documentação oficial do Docker Compose.
-- **[Kubernetes](https://kubernetes.io/pt-br/docs/home/)**: Documentação oficial do Kubernetes.
-- **[Terraform](https://www.terraform.io/)**: Site oficial do Terraform.
 - **[Mercado Pago](https://www.mercadopago.com.br/developers/pt/docs/qr-code/integration-configuration/qr-dynamic/integration)**: Documentação oficial do Mercado Pago.
 
 ### 🐳 Imagem Docker
 
-A imagem docker desse projeto foi buildada através do arquivo `Dockerfile` presente neste repositório, e enviada a um
-container registry (Docker HUB). Para visualizá-la, basta acessar o
-link: https://hub.docker.com/r/willosouza/fiap-soat-tech-challenge
-
-Caso queira dar um pull na imagem, basta rodar o comando `docker pull willosouza/fiap-soat-tech-challenge:latest`, que a imagem mais recente será baixada.
+A imagem docker desse projeto foi buildada através do arquivo `Dockerfile` presente neste repositório.
 
 ### 🚀 Execução
 
@@ -186,210 +137,6 @@ rodar o seguinte comando: `docker compose up -d`
 ![Docker compose detached mode](./assets/compose_detached_mode.png)
 </details>
 
-<details style="cursor: pointer;">
- <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Subindo aplicação em Cluster Kubernetes local (Ex: Docker Desktop ou Minikube) utilizando terraform</summary>
- <br>
-
- Uma outra forma de subir a aplicação, é fazendo uso dos manifestos kubernetes (arquivos yaml) presentes na pasta `/infra/k8s` e implantar os recursos em um cluster K8S local. Para realizar isso, basta seguir os passos a seguir:
-  
-  1. Certificar que o Cluster local esteja executando (Para o exemplo do minikube, basta rodar os comandos `minikube start` para inicializar o cluster e `minikube status` para verificar o status do cluster);
-  ![minikube-start-status](./assets/minikube-start-status.png)
-  
-  2. Certificar que o Terraform esteja instalado executando o comando `terraform --version`;
-  ![terraform-version](./assets/terraform-version.png)
-
-  3. Entrar na pasta `infra/terraform`;
-  4. Inicializar o Terraform no projeto `terraform init`;
-  5. Verificar que o script do Terraform é valido rodando o comando `terraform validate`;
-  6. Executar o comando `terraform plan -var-file="./inventories/minikube/terraform.tfvars"` para executar o planejamento da execução/implementação. No caso da execução em um cluster kubernetes do `Docker Desktop`, basta executar o comando `terraform plan`, sem adicionar o caminho para o arquivo de variáveis;
-  7. Executar o comando `terraform apply  -var-file="./inventories/minikube/terraform.tfvars"` para criar a infra dentro do cluster;
-
-  Para acessar a aplicação, será necessário acessar a rota através do IP Público do service do ingress. Esse passo é muda de acordo com o Cluster local que você estiver utilizando:
-  Caso esteja utilizando Docker Desktop:
-  1. Executar o comando `kubectl get svc -n ingress-nginx`;
-  2. Verificar que o svc `nginx-ingress-ingress-nginx-controller` que é do tipo `LoadBalancer` está com o EXTERNAL-IP definido como `localhost`;
-  ![docker-desktop-get-svc-ingress](./assets/docker-desktop-get-svc-ingress.png)
-
-  3. Acessar a aplicação utilizando o localhost;
-  ![open-api-docker-desktop-localhost](./assets/open-api-docker-desktop-localhost.png)
-
-  Caso esteja utilizando MiniKube:
-  1. Executar o comando `minikube tunnel`;<br>
-  ![minikube-tunnel](./assets/minikube-tunnel.png)
-
-  2. Executar o comando `kubectl get svc -n ingress-nginx`;
-  ![get-ingress-svc](./assets/get-ingress-svc.png)
-
-  3. Verificar o IP Externo do service e acessar a aplicação utilizando o mesmo;
-  ![open-api-minikube-ip](./assets/open-api-minikube-ip.png)
-
-</details>
-
-<details style="cursor: pointer;">
- <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Subindo aplicação em Cluster Kubernetes local utilizando shell scripts</summary>
- <br>
-
-  Outra forma de realizar o deploy da aplicação, é utilizando os shell scripts que estão dentro da pasta `/infra/k8s`. Para subir os recursos do k8s, basta seguir a seguinte ordem de execução:
-
-  1. Garantir que tem o helm instalado em sua máquina rodando o comando `helm version`
-  ![helm-version](./assets/helm-version.png)
-
-  2. Executar os shell scripts
-  ```bash
-  # Para subir os recursos do namespace techchallenge
-  $ ./apply-techchallenge.sh
-
-  # Para subir o metric server no namespace kube-system
-  $ ./apply-kube-system.sh
-
-  # Para subir o prometheus e o grafana no namespace monitoring
-  $ ./apply-monitoring.sh
-
-  # Para subir o nginx controller no namespace nginx-ingress
-  $ ./apply-nginx-ingress
-  ```
-
-</details>
-
-<details style="cursor: pointer;">
- <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Subindo aplicação em Cluster Kubernetes local utilizando kubectl e helm</summary>
- <br>
-
- Também é possível realizar o deploy da aplicação rodando o comando `kubectl apply -f <manifesto>` para cada aquivo yaml presente nas subpastas de `/infra/k8s`. Para que o deploy seja realizado dessa forma, é necessário seguir a seguinte ordem de execução:
-
-  1. Garantir que tem o helm instalado em sua máquina rodando o comando `helm version`
-  ![helm-version](./assets/helm-version.png)
-
-  2. Executar os seguintes comandos na ordem apresentada:
-  ```bash
-  # Criar o namespace techchallenge
-  $ kubectl apply -f "techchallenge/namespace.yaml"
-
-  # Criar o secrets
-  $ kubectl apply -f "techchallenge/secret/tech-challenge-secret.yaml"
-
-  # Criar o storage class
-  $ kubectl apply -f "techchallenge/storageclass/tech-challenge-storage-class.yaml"
-
-  # Criar o persistent volume
-  $ kubectl apply -f "techchallenge/pv/tech-challenge-persistent-volume.yaml"
-
-  # Criar o persistent volume claim
-  $ kubectl apply -f "techchallenge/pvc/tech-challenge-persistent-volume-claim.yaml"
-
-  # Criar o statefulset
-  $ kubectl apply -f "techchallenge/statefulset/tech-challenge-statefulset.yaml"
-
-  # Criar o deployment
-  $ kubectl apply -f "techchallenge/deployment/tech-challenge-app-deployment.yaml"
-
-  # Criar o service do statefulset
-  $ kubectl apply -f "techchallenge/service/tech-challenge-db-service.yaml"
-
-  # Criar o service do deployment
-  $ kubectl apply -f "techchallenge/service/tech-challenge-app-service.yaml"
-
-  # Criar o horizontal pod autoscaler
-  $ kubectl apply -f "techchallenge/hpa/tech-challenge-app-hpa.yaml"
-
-  # Criar o ingress
-  $ kubectl apply -f "techchallenge/ingress/tech-challenge-ingress.yaml"
-
-  # Implantar o helm chart do metrics server
-  $ helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
-  $ helm repo update
-  $ helm upgrade --install metrics-server metrics-server/metrics-server \
-    --namespace kube-system \
-    --version 3.12.1 \
-    --values "kube-system/values.yaml" \
-    --wait \
-    --timeout 600s
-
-  # Criar o namespace monitoring
-  $ kubectl apply -f "monitoring/namespace.yaml"
-
-  # Implantar o helm chart do prometheus
-  $ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-  $ helm repo update
-  $ helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
-    --namespace monitoring \
-    --version 51.2.0 \
-    --values "monitoring/kube-prometheus-stack/values.yaml" \
-    --wait \
-    --timeout 600s
-
-  # Criar o config map do Grafana
-  $ kubectl apply -f "monitoring/grafana/configmap.yaml"
-
-  # Implantar o helm chart do prometheus
-  $ helm repo add grafana https://grafana.github.io/helm-charts
-  $ helm repo update
-  $ helm upgrade --install grafana grafana/grafana \
-    --namespace monitoring \
-    --version 8.5.1 \
-    --values "monitoring/grafana/values.yaml" \
-    --wait \
-    --timeout 600s
-
-  # Criar o ingress do grafana
-  $ kubectl apply -f "monitoring/grafana/grafana-ingress.yaml"
-
-  # Criar o namespace do nginx-ingress
-  $ kubectl apply -f "nginx-ingress/namespace.yaml"
-
-  # Implantar o helm chart do nginx ingress
-  $ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-  $ helm repo update
-  $ helm upgrade --install nginx-ingress ingress-nginx/ingress-nginx \
-    --namespace ingress-nginx \
-    --version 4.11.2 \
-    --values "nginx-ingress/values.yaml" \
-    --wait \
-    --timeout 600s
-  ```
-
-</details>
-
-<details style="cursor: pointer;">
-  <summary style="background-color: #086dd7b0; border-radius: 5px; font-size: 15px; padding-left: 6px; font-weight: bold;">Subindo aplicação em Cluster EKS</summary>
-  <br>
-
-  Caso deseje subir a aplicação em um cluster EKS em uma conta AWS, basta seguir os seguintes passos:
-  
-  1. Certificar que o Terraform esteja instalado executando o comando `terraform --version`;
-  ![terraform-version](./assets/terraform-version.png)
-
-  2. Certificar que o `aws cli` está instalado e configurado com as credenciais da sua conta AWS;
-  ![aws-cli-version](./assets/aws-cli-version.png)
-
-  3. Acessar a pasta `infra/eks/cluster` que contém os arquivos que irão criar um Cluster EKS e Work Nodes na AWS;
-  4. Inicializar o Terraform no projeto `terraform init`;
-  5. Verificar que o script do Terraform é valido rodando o comando `terraform validate`;
-  6. Executar o comando `terraform plan` para executar o planejamento da execução/implementação;
-  7. Executar o comando `terraform apply` para criar a infra dentro do cluster;
-  8. Após a execução do Terraform finalizar, verificar se o cluster e os nodes foram inicializados na AWS;
-  ![eks-cluster](./assets/eks-cluster.png)
-  9. Após a criação do cluster, é necessário configurar o kubeconfig para que o `kubectl` aponte para o novo cluster criado na AWS. Para fazer isso, basta executar o comando `aws eks update-kubeconfig --region us-east-1 --name fiap-tech-challenge-eks-cluster`. A region escolhida para que o cluster seja criado foi a `us-east-1` e o nome do cluster é `fiap-tech-challenge-eks-cluster`
-  10. Acessar a pasta `infra/eks/infra` que contém os arquivos que irão criar os Pods da aplicação e do Banco de Dados, os services e os recursos relacionados à monitoração na AWS;
-  11. Inicializar o Terraform no projeto `terraform init`;
-  12. Verificar que o script do Terraform é valido rodando o comando `terraform validate`;
-  13. Executar o comando `terraform plan` para executar o planejamento da execução/implementação;
-  14. Executar o comando `terraform apply` para criar a infra dentro do cluster;
-  15. Após a execução do Terraform finalizar, verificar se os recursos foram criados corretamente na conta AWS;
-
-  Para acessar a aplicação, basta acessar o serviço Load Balancer na AWS, copiar o DNS do load balancer que foi criado e acessar as rotas da aplicação utilizando o DNS gerado.
-  ![load-balancer-dns](./assets/load-balancer-dns.png)
-  ![open-api-load-balancer-dns](./assets/open-api-load-balancer-dns.png)
-
-  Também é possível acessar os dashs do grafana utilizando a mesma dns do load balancer: `<load-balancer-dns>/grafana/login`
-  ![grafana-load-balancer-dns](./assets/grafana-load-balancer-dns.png)
-
-  As credenciais de acesso ao grafana são:
-
-  username: `admin`
-  password: `techchallenge`
-</details>
-
 ### 🛒 Integração Checkout (Mercado Pago)
 
 Nesta fase do projeto, integramos o Checkout com a API do Mercado Pago, possibilitando o pagamento via QR Code dinâmico.
@@ -424,16 +171,9 @@ Link para acessar ao swagger após subir a aplicação:
 ```bash
 # Ambiente Local via docker compose
 http://localhost:8357/api/swagger-ui/index.html
-
-# Ambiente Local via cluster kubernetes do docker desktop
-http://localhost/api/swagger-ui/index.html
-
-# Ambiente Local via cluster kubernetes do minikube
-http://<external_ip_do_service_do_nginx>/api/swagger-ui/index.html
-
-# Ambiente AWS via cluster EKS
-http://<endereço_dns_do_load_balancer>/api/swagger-ui/index.html
 ```
+
+🔗 Ou acesse https://fiap-soat-12.github.io/fiap-soat-tech-challenge-api/
 
 ### 🔃 Ordem de execução das APIs
 
