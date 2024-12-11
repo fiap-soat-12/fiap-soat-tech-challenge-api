@@ -19,6 +19,15 @@
                 "operationId": "update",
                 "parameters": [
                     {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization token"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "required": true,
@@ -83,6 +92,15 @@
                 "summary": "Delete a Product By ID",
                 "operationId": "deleteProductById",
                 "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization token"
+                    },
                     {
                         "name": "id",
                         "in": "path",
@@ -229,6 +247,15 @@
                 "operationId": "findProductsByCategory",
                 "parameters": [
                     {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization token"
+                    },
+                    {
                         "name": "category",
                         "in": "query",
                         "required": true,
@@ -307,6 +334,17 @@
                 ],
                 "summary": "Register a Product",
                 "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization token"
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -421,6 +459,17 @@
                 ],
                 "summary": "Register a Order",
                 "operationId": "create_1",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization token"
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -480,6 +529,17 @@
                 ],
                 "summary": "Register a Customer",
                 "operationId": "create_2",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization token"
+                    }
+                ],
                 "requestBody": {
                     "description": "Representation of a Customer",
                     "content": {
@@ -542,6 +602,15 @@
                 "operationId": "evolveStatus",
                 "parameters": [
                     {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization token"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "required": true,
@@ -599,6 +668,15 @@
                 "operationId": "isOrderPaid",
                 "parameters": [
                     {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization token"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "required": true,
@@ -655,6 +733,15 @@
                 "summary": "Find a Customer By Document",
                 "operationId": "findByDocument",
                 "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization token"
+                    },
                     {
                         "name": "document",
                         "in": "path",
