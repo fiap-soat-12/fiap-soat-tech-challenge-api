@@ -23,7 +23,7 @@ pedidos, gerenciamento de pagamentos e envio dos pedidos para a cozinha após a 
 ![Java](https://img.shields.io/badge/java_21-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring_3-%236DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white)
 ![Maven](https://img.shields.io/badge/Apache%20Maven-C71A36.svg?style=for-the-badge&logo=Apache-Maven&logoColor=white)
-![Postgres](https://img.shields.io/badge/PostgreSQL-4169E1.svg?style=for-the-badge&logo=PostgreSQL&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1.svg?style=for-the-badge&logo=PostgreSQL&logoColor=white)
 ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Mercado Pago](https://img.shields.io/badge/Mercado%20Pago-00B1EA.svg?style=for-the-badge&logo=Mercado-Pago&logoColor=white)
@@ -74,6 +74,7 @@ O projeto segue a Clean Architecture, permitindo maior flexibilidade e facilidad
 
 - **[Java 21](https://docs.oracle.com/en/java/javase/21/)**: Documentação oficial do Java 21.
 - **[Maven 3.6.3+](https://maven.apache.org/)**: Site oficial do Maven.
+- **[PostgreSQL](https://www.postgresql.org/docs/)**: Documentação oficial do PostgreSQL.
 - **[Docker](https://www.docker.com/)**: Site oficial do Docker.
 - **[Docker Compose](https://docs.docker.com/compose/)**: Documentação oficial do Docker Compose.
 - **[Mercado Pago](https://www.mercadopago.com.br/developers/pt/docs/qr-code/integration-configuration/qr-dynamic/integration)**: Documentação oficial do Mercado Pago.
